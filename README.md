@@ -1,8 +1,16 @@
 # Linux Keyboard OSD Notifier
 
-![Showcase](./assets/showcase.png)
+> A basic OSD notification and tray indicator that notifies capslock and numlock states
 
-A basic OSD notification that notifies capslock and numlock states
+![Showcase](./assets/showcase.png)
+![Showcase Tray](./assets/showcase_tray.png)
+
+## Features
+
+- System consistent design (for KDE)
+- Supports theming via system preferences
+- Works with user-space permissions
+- A tray indicator that shows active states of modifier keys
 
 ## Why?
 

@@ -7,8 +7,11 @@ bool is_caps_lock = true;
 bool is_pressed = true;
 uint64_t last_notify_id = 0;
 lunaris::styles::color_palette* colors;
+bool caps_lock_state = false;
+bool num_lock_state = false;
 
 #include "event_listener.cpp"
+#include "tray.cpp"
 
 void* hide_notify(void* notify_id_ptr){
     uint64_t* notify_id = (uint64_t*)notify_id_ptr;
@@ -22,6 +25,12 @@ void send_key_event(int keycode, bool state){
     win->set_visibility(true);
     is_caps_lock = THE_KEY_CAPSLOCK == keycode;
     is_pressed = state;
+    if(is_caps_lock){
+        caps_lock_state = state;
+    } else {
+        num_lock_state = state;
+    };
+    tray_update_state(caps_lock_state, num_lock_state);
 
     pthread_t hide_notify_thread;
     uint64_t* notify_id = (uint64_t*)malloc(sizeof(uint64_t));
@@ -31,6 +40,7 @@ void send_key_event(int keycode, bool state){
 };
 
 int main() {
+    tray_loop();
     win = lunaris::new_window();
     colors = lunaris::styles::generate_color_palette_from_system();
     win->set_decoration(false);
