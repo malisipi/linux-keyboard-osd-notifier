@@ -5,7 +5,7 @@
 
 void send_key_event(int keycode, bool state);
 
-void* keyboard_event_handler(void*) {
+void keyboard_event_handler() {
     XEvent event;
 
     Display* display = XOpenDisplay(NULL);
